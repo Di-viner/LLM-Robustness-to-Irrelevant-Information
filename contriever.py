@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, AutoModel
 from dotenv import load_dotenv
 
 class Contriever:
-    def __init__(self, model_name="facebook/contriever", device_ids=[0]):
+    def __init__(self, model_name="facebook/contriever", device_ids=[0, 1]):
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModel.from_pretrained(model_name)
         self.model = torch.nn.DataParallel(self.model, device_ids=device_ids)

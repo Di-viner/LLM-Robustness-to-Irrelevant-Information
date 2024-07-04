@@ -20,6 +20,35 @@ def save_file(data, path):
         w.close()
 
 
+def load_path(file_name):
+    if file_name.lower() in ["pqa", "popqa"]:
+        prefix = "Irrelevant_PQA"
+        path = "data/Irrelevant_PopQA"
+    elif file_name.lower() in ["eq", "entityquestions"]:
+        prefix = "Irrelevant_EQ"
+        path = "data/Irrelevant_EntityQuestions"
+    else:
+        raise ValueError("Unexpected Dataset: " + file_name)
+    return prefix, path
+
+
+def create_dict_id_to_data(data, line_flag):
+    dict = {}
+    if line_flag:
+        for unit in data:
+            dict[unit['id']] = unit
+    else:
+        for prop in data:
+            for unit in data[prop]:
+                dict[unit['id']] = unit
+    return dict
+
+
+def first_100_words(text):
+    words = text.split()
+    return ' '.join(words[:100])
+
+
 def build_claim(dataset, relation, subj, obj):
     if dataset == "PQA":
         return build_claim_PQA(relation, subj, obj)
@@ -27,6 +56,7 @@ def build_claim(dataset, relation, subj, obj):
         return build_claim_EQ(relation, subj, obj)
     else:
         raise ValueError("Unexpected Dataset: " + dataset)
+
 
 def build_claim_PQA(relation, subj, obj):
     if relation == "occupation":
@@ -66,19 +96,19 @@ def build_claim_PQA(relation, subj, obj):
 
 
 def build_claim_EQ(relation, subj, obj):
-    if relation == 'headquarter':
+    if relation == "headquarters location":
         return "The headquarter of " + subj + " is located in " + obj + '.'
-    elif relation == "founder":
+    elif relation == "founded by":
         return subj + " was founded by " + obj + '.'
-    elif relation == "deathplace":
+    elif relation == "place of death":
         return subj + " died in " + obj + '.'
     elif relation == "performer":
         return subj + " was performed by " + obj + '.'
-    elif relation == "located in":
+    elif relation == "location_P131":
         return subj + " is located in " + obj + '.'
-    elif relation == "location of discovery":
+    elif relation == "location of formation":
         return subj + " was founded in " + obj + '.'
-    elif relation == "recordlabel":
+    elif relation == "record label":
         return subj + " is represented by the music label " + obj + '.'
     elif relation == "country":
         return subj + " was created in " + obj + '.'
@@ -86,7 +116,7 @@ def build_claim_EQ(relation, subj, obj):
         return subj + " is married to " + obj + '.'
     elif relation == "creator":
         return subj + " was created by " + obj + '.'
-    elif relation == "location":
+    elif relation == "location_P276":
         return subj + " is located in " + obj + '.'
     elif relation == "educated at":
         return subj + " was educated at " + obj + '.'
@@ -102,4 +132,3 @@ def build_claim_EQ(relation, subj, obj):
         return subj + " is owned by " + obj + '.'
     else:
         raise ValueError("Wrong Relation " + relation)
-
