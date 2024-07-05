@@ -44,6 +44,14 @@ def create_dict_id_to_data(data, line_flag):
     return dict
 
 
+def count_words(text):
+    try:
+        words = re.findall(r'\b\w+\b', text)
+    except:
+        return 0
+    return len(words)
+
+
 def first_100_words(text):
     words = text.split()
     return ' '.join(words[:100])
