@@ -42,7 +42,7 @@ def build_multiple_choice_quantity_prompt(data, multi_irrelevant_info_flag, rele
     for unit in data:
         question = unit['question']
         if multi_irrelevant_info_flag:
-            irrelevant_info_list = [unit['related_v1'], unit['related_v2'], unit['related_v3']]
+            irrelevant_info_list = [unit['related_cc'], unit['related_ml'], unit['related_fa']]
         else:
             irrelevant_info_list = [unit['related_contriever_highest']]
         relevant_info_list = [unit['parametric_memory']] if relevant_info_flag else []
@@ -71,7 +71,7 @@ def build_format_prompt(data, format_type):
     for unit in data:
         question = unit['question']
         related_template = unit['related_template']
-        irrelevant_info_list = [unit['related_v1'], unit['related_v2'], unit['related_v3']]
+        irrelevant_info_list = [unit['related_cc'], unit['related_ml'], unit['related_fa']]
         relevant_info_list = unit['parametric_memory']
         info_list = irrelevant_info_list + relevant_info_list
         option_list = [unit["memory_answer"], unit["related_template"], "I'm not sure."]
