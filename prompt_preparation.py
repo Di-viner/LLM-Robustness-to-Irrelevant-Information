@@ -23,7 +23,7 @@ def build_multiple_choice_semantic_relevance_prompt(data, _type):
         random.shuffle(irrelevant_info_list)
         random.shuffle(option_list)
         unit["option_list"] = option_list
-        info_str = "\n".join([f"{i + 1}. {evidence}" for i, evidence in enumerate(info_list)])
+        info_str = "\n".join([f"{i + 1}. {evidence}" for i, evidence in enumerate(irrelevant_info_list)])
         option_str = "\n".join([f"{letter}. {option.strip()}" for letter, option in zip(string.ascii_uppercase, option_list)])
         prompt_text = f"""According to the given information and your knowledge, choose the best choice from the following options.
 Information:
@@ -52,7 +52,7 @@ def build_multiple_choice_quantity_prompt(data, multi_irrelevant_info_flag, rele
         random.shuffle(option_list)
         unit["info_list"] = info_list
         unit["option_list"] = option_list
-        info_str = "\n".join([f"{i + 1}. {evidence}" for i, evidence in enumerate(irrelevant_info_list)])
+        info_str = "\n".join([f"{i + 1}. {evidence}" for i, evidence in enumerate(info_list)])
         option_str = "\n".join([f"{letter}. {option.strip()}" for letter, option in zip(string.ascii_uppercase, option_list)])
         prompt_text = f"""According to the given information and your knowledge, choose the best choice from the following options.
 Information:
