@@ -20,7 +20,7 @@ def save_file(data, path):
         w.close()
 
 
-def load_path(file_name):
+def get_dataset_prefix_and_path(file_name):
     if file_name.lower() in ["pqa", "popqa"]:
         prefix = "Irrelevant_PQA"
         path = "data/Irrelevant_PopQA"
@@ -57,86 +57,86 @@ def first_100_words(text):
     return ' '.join(words[:100])
 
 
-def build_claim(dataset, relation, subj, obj):
+def build_claim(dataset, relation, subj, obj, induce=False):
     if dataset == "PQA":
-        return build_claim_PQA(relation, subj, obj)
+        return build_claim_PQA(relation, subj, obj, induce)
     elif dataset == "EQ":
-        return build_claim_EQ(relation, subj, obj)
+        return build_claim_EQ(relation, subj, obj, induce)
     else:
         raise ValueError("Unexpected Dataset: " + dataset)
 
 
-def build_claim_PQA(relation, subj, obj):
+def build_claim_PQA(relation, subj, obj, induce=False):
     if relation == "occupation":
-        return subj + "'s occupation is " + obj + '.'
+        return subj + "'s occupation is" + ("/is not " if induce else " ") + obj + ("" if induce else ".")
     elif relation == "place of birth":
-        return subj + " was born in " + obj + '.'
+        return subj + " was" + ("/was not " if induce else " ") + "born in " + obj + ("" if induce else ".")
     elif relation == "genre":
-        return "The genre of " + subj + " is " + obj + '.'
+        return "The genre of " + subj + " is" + ("/is not " if induce else " ") + obj + ("" if induce else ".")
     elif relation == "father":
-        return obj + " is the father of " + subj + '.'
+        return obj + " is" + ("/is not " if induce else " ") + "the father of " + subj + ("" if induce else ".")
     elif relation == "country":
-        return subj + " is in " + obj + '.'
+        return subj + " is" + ("/is not " if induce else " ") + "in " + obj + ("" if induce else ".")
     elif relation == "producer":
-        return obj + ' is the producer of ' + subj + '.'
+        return obj + " is" + ("/is not " if induce else " ") + "the producer of " + subj + ("" if induce else ".")
     elif relation == "director":
-        return obj + ' is the director of ' + subj + '.'
+        return obj + " is" + ("/is not " if induce else " ") + "the director of " + subj + ("" if induce else ".")
     elif relation == "capital of":
-        return subj + ' is the capital of ' + obj + '.'
+        return subj + " is" + ("/is not " if induce else " ") + "the capital of " + obj + ("" if induce else ".")
     elif relation == "screenwriter":
-        return obj + ' is the screenwriter for ' + subj + '.'
+        return obj + " is" + ("/is not " if induce else " ") + "the screenwriter for " + subj + ("" if induce else ".")
     elif relation == "composer":
-        return obj + ' was the composer of ' + subj + '.'
+        return obj + " was" + ("/was not " if induce else " ") + "the composer of " + subj + ("" if induce else ".")
     elif relation == "color":
-        return "The color of " + subj + " is " + obj + '.'
+        return "The color of " + subj + " is" + ("/is not " if induce else " ") + obj + ("" if induce else ".")
     elif relation == "religion":
-        return obj + " is the religion of " + subj + '.'
+        return obj + " is" + ("/is not " if induce else " ") + "the religion of " + subj + ("" if induce else ".")
     elif relation == "sport":
-        return subj + " plays " + obj + '.'
+        return subj + " plays" + ("/doesn't play " if induce else " ") + obj + ("" if induce else ".")
     elif relation == "author":
-        return obj + " is the author of " + subj + '.'
+        return obj + " is" + ("/is not " if induce else " ") + "the author of " + subj + ("" if induce else ".")
     elif relation == "mother":
-        return obj + " is the mother of " + subj + '.'
+        return obj + " is" + ("/is not " if induce else " ") + "the mother of " + subj + ("" if induce else ".")
     elif relation == "capital":
-        return obj + " is the capital of " + subj + '.'
+        return obj + " is" + ("/is not " if induce else " ") + "the capital of " + subj + ("" if induce else ".")
     else:
         raise ValueError("Wrong Relation " + relation)
 
 
-def build_claim_EQ(relation, subj, obj):
+def build_claim_EQ(relation, subj, obj, induce=False):
     if relation == "headquarters location":
-        return "The headquarter of " + subj + " is located in " + obj + '.'
+        return "The headquarter of " + subj + " is" + ("/is not " if induce else " ") + "located in " + obj + ("" if induce else ".")
     elif relation == "founded by":
-        return subj + " was founded by " + obj + '.'
+        return subj + " was" + ("/was not " if induce else " ") + "founded by " + obj + ("" if induce else ".")
     elif relation == "place of death":
-        return subj + " died in " + obj + '.'
+        return subj + " died" + ("/doesn't die " if induce else " ") + "in " + obj + ("" if induce else ".")
     elif relation == "performer":
-        return subj + " was performed by " + obj + '.'
+        return subj + " was" + ("/was not " if induce else " ") + "performed by " + obj + ("" if induce else ".")
     elif relation == "location_P131":
-        return subj + " is located in " + obj + '.'
+        return subj + " is" + ("/is not " if induce else " ") + "located in " + obj + ("" if induce else ".")
     elif relation == "location of formation":
-        return subj + " was founded in " + obj + '.'
+        return subj + " was" + ("/was not " if induce else " ") + "founded in " + obj + ("" if induce else ".")
     elif relation == "record label":
-        return subj + " is represented by the music label " + obj + '.'
+        return subj + " is" + ("/is not " if induce else " ") + "represented by the music label " + obj + ("" if induce else ".")
     elif relation == "country":
-        return subj + " was created in " + obj + '.'
+        return subj + " was" + ("/was not " if induce else " ") + "created in " + obj + ("" if induce else ".")
     elif relation == "spouse":
-        return subj + " is married to " + obj + '.'
+        return subj + " is" + ("/is not " if induce else " ") + "married to " + obj + ("" if induce else ".")
     elif relation == "creator":
-        return subj + " was created by " + obj + '.'
+        return subj + " was" + ("/was not " if induce else " ") + "created by " + obj + ("" if induce else ".")
     elif relation == "location_P276":
-        return subj + " is located in " + obj + '.'
+        return subj + " is" + ("/is not " if induce else " ") + "located in " + obj + ("" if induce else ".")
     elif relation == "educated at":
-        return subj + " was educated at " + obj + '.'
+        return subj + " was" + ("/was not " if induce else " ") + "educated at " + obj + ("" if induce else ".")
     elif relation == "notable work":
-        return subj + " is famous for " + obj + '.'
+        return subj + " is" + ("/is not " if induce else " ") + "famous for " + obj + ("" if induce else ".")
     elif relation == "language":
-        return subj + " was written in " + obj + '.'
+        return subj + " was" + ("/was not " if induce else " ") + "written in " + obj + ("" if induce else ".")
     elif relation == "child":
-        return subj + "'s child is " + obj + '.'
+        return subj + "'s child is" + ("/is not " if induce else " ") + obj + ("" if induce else ".")
     elif relation == "manufacturer":
-        return subj + " is produced by " + obj + '.'
+        return subj + " is" + ("/is not " if induce else " ") + "produced by " + obj + ("" if induce else ".")
     elif relation == "owned by":
-        return subj + " is owned by " + obj + '.'
+        return subj + " is" + ("/is not " if induce else " ") + "owned by " + obj + ("" if induce else ".")
     else:
         raise ValueError("Wrong Relation " + relation)
