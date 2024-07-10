@@ -1,25 +1,15 @@
+from dotenv import load_dotenv
 import ast
 import contriever
 import utils
 import json
 from tqdm import tqdm
-from dotenv import load_dotenv
-
-
-def create_irrelevant_info(_type, dataset, output_path):
-    if _type == "unrelated":
-        create_unrelated_info(dataset, output_path)
-    elif _type == "partially_related":
-        create_partially_related_info(dataset, output_path)
-    elif _type == "related":
-        # TODO
-        pass
-    else:
-        raise ValueError("Unexpected Irrelevant Infomation Type: " + _type)
+import prompt_preparation
+from openai_request import prompt_chatgpt
 
 
 def create_unrelated_info(dataset, output_path):
-    prefix, path = utils.load_path(dataset)
+    prefix, path = utils.get_dataset_prefix_and_path(dataset)
     try:
         with open(f"{path}/{prefix}_prop.json", 'r') as json_file:
             data = json.load(json_file)
@@ -67,7 +57,7 @@ def create_unrelated_info(dataset, output_path):
 
 
 def create_partially_related_info_p1(dataset):
-    prefix, path = utils.load_path(dataset)
+    prefix, path = utils.get_dataset_prefix_and_path(dataset)
     ret_data = {}
     try:
         with open(f"{path}/{prefix}_prop.json", 'r') as json_file:
@@ -119,7 +109,7 @@ def create_partially_related_info_p1(dataset):
 
 
 def create_partially_related_info_p2(dataset):
-    prefix, path = utils.load_path(dataset)
+    prefix, path = utils.get_dataset_prefix_and_path(dataset)
     ret_data = {}
     try:
         with open(f"{path}/{prefix}_prop.json", 'r') as json_file:
@@ -175,7 +165,7 @@ def create_partially_related_info_p2(dataset):
 
 
 def create_partially_related_info(dataset, output_path):
-    prefix, path = utils.load_path(dataset)
+    prefix, path = utils.get_dataset_prefix_and_path(dataset)
     try:
         with open(f"{path}/{prefix}_prop.json", 'r') as json_file:
             data = json.load(json_file)
@@ -199,5 +189,45 @@ def create_partially_related_info(dataset, output_path):
         json.dump(data, json_file)
 
 
+def create_related_info(dataset, output_path):
+    prefix, path = utils.get_dataset_prefix_and_path(dataset)
+    try:
+        with open(f"{path}/{prefix}_partially_related.json", 'r') as json_file:
+            data = json.load(json_file)
+    except:
+        print("Files not found. Please download the files first.")
+        return
+    data_lines = []
+    data_dict = utils.create_dict_id_to_data(data, False)
+    for idx1, prop in enumerate(data):
+        data_prop = data[prop]
+        for idx2, unit in enumerate(data_prop):
+            data_lines.append(unit)
+    prompt_list = prompt_preparation.build_related_info_prompt(data_lines, data_dict, dataset)
+    total_price = 0
+    for idx, prompt in enumerate(tqdm(prompt_list[:10])):
+        if prompt == "":
+            with open(output_path, 'a+', encoding='utf-8') as f:
+                assistant_output = str(idx)
+                f.write(assistant_output + '\n')
+            continue
+        results, _, price = prompt_chatgpt("You are a helpful assistant.", index=idx, save_path=output_path,
+                                           user_input=prompt, model_name="gpt-4-1106-preview", temperature=0)
+        total_price += price
+    print("Total Price: ", total_price)
+
+
+def create_irrelevant_info(_type, dataset, output_path):
+    if _type == "unrelated":
+        create_unrelated_info(dataset, output_path)
+    elif _type == "partially_related":
+        create_partially_related_info(dataset, output_path)
+    elif _type == "related":
+        create_related_info(dataset, output_path)
+    else:
+        raise ValueError("Unexpected Irrelevant Infomation Type: " + _type)
+
+
 if __name__ == "__main__":
     load_dotenv()
+    create_irrelevant_info("related", "EQ", "data/Irrelevant_EntityQuestions/EQ_test_related.txt")
