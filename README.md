@@ -4,7 +4,7 @@ Code and Data for the Paper "[How Easily do Irrelevant Inputs Skew the Responses
 Will come soon. Stay tuned!
 
 -----
-** Update in progress ** We release our dataset at Hugging Face Datasets. Please check [PLACEHOLDER] for more details.
+**Update in progress** We release our dataset at Hugging Face Datasets. Please check [PLACEHOLDER] for more details.
 
 -----
 
@@ -18,7 +18,7 @@ project-root/
 │   │   ├── ...
 ```
 -----
-If you find this project useful for your research, please consider citing our paper:
+If our paper or related resources prove valuable to your research, we kindly ask that you cite our work.
 ```bibtex
 @article{wu2024easily,
   title={How Easily do Irrelevant Inputs Skew the Responses of Large Language Models?},
