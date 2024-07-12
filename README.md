@@ -25,7 +25,7 @@ project-root/
 │   │   ├── IrrelevantPQA_prop.json
 │   │   ├── ...
 ```
-Regarding the process of parametric memory elicitation, please refer to the [repo](https://github.com/OSU-NLP-Group/LLM-Knowledge-Conflict).
+Regarding the process of parametric memory elicitation, please refer to the previous work [repo](https://github.com/OSU-NLP-Group/LLM-Knowledge-Conflict).
 
 -----
 If our paper or related resources prove valuable to your research, we kindly ask that you cite our work.
