@@ -139,3 +139,22 @@ Answer:"""
             raise ValueError("Unexpected question format type: " + format_type)
         prompt_list.append(prompt_text)
     return prompt_list, data
+
+
+def build_free_form_response_align_to_option_prompt(data, input_file):
+    ret_data = []
+    with open(input_file, 'r') as f:
+        lines = f.readlines()
+    for i, unit in enumerate(data):
+        text = lines[i].split('\t', 1)[-1].strip()
+        option_list = unit["option_list"]
+        option_str = "\n".join(
+            [f"{letter}. {option.strip()}" for letter, option in zip(string.ascii_uppercase, option_list)])
+        prompt_text = f"""Based on the following text, which option is supported?
+Text:
+{text}
+Options:
+{option_str}
+Answer:"""
+        ret_data.append(prompt_text)
+    return ret_data
