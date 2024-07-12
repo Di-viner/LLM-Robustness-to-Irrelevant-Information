@@ -20,6 +20,14 @@ def save_file(data, path):
         w.close()
 
 
+def sort_lines(_file):
+    with open(_file, "r") as file:
+        lines = file.readlines()
+    sorted_lines = sorted(lines, key=lambda line: int(line.split()[0]))
+    with open(_file, "w") as sorted_file:
+        sorted_file.writelines(sorted_lines)
+
+
 def get_dataset_prefix_and_path(file_name):
     if file_name.lower() in ["pqa", "popqa"]:
         prefix = "Irrelevant_PQA"
