@@ -1,11 +1,10 @@
 import utils
 import re
 
-
 uncertain_phrases = ["not specif", "not mention", "not possible",
-                       "no indication", "no specif", "no mention", "no information", "no data",
-                       "do not have", "does not", "I'm sorry", "I'm not sure", "neither",
-                       "cannot determine", "cannot provide", "cannot be determined", "is not provided", "none of"]
+                     "no indication", "no specif", "no mention", "no information", "no data",
+                     "do not have", "does not", "I'm sorry", "I'm not sure", "neither",
+                     "cannot determine", "cannot provide", "cannot be determined", "is not provided", "none of"]
 
 
 def evaluate_multichoice(data, input_file, irr_template, cot_flag=False):
