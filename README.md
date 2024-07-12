@@ -8,11 +8,11 @@ Will come soon. Stay tuned!
 
 -----
 
-To create irrelevant information, please download the data [here](https://drive.google.com/drive/folders/149Jdkirbm7ppP2kwMD4pDe8sILMvLKWv?usp=sharing). 
+To create irrelevant information, please download the raw data and contriever docs [here](https://drive.google.com/drive/folders/149Jdkirbm7ppP2kwMD4pDe8sILMvLKWv?usp=sharing). 
 Then, the directory structure should look like this:
 ```plaintext
 project-root/
-├── data/
+├── raw_data_and_contriever_docs/
 │   ├── Irrelevant_PopQA/
 │   │   ├── IrrelevantPQA_prop.json
 │   │   ├── ...
