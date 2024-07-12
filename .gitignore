@@ -7,8 +7,10 @@
 
 .idea/
 dumps/
-data/
+raw_data_and_contriever_docs/
+before_batch_process/
 data_process.py
+
 # User-specific stuff
 .idea/**/workspace.xml
 .idea/**/tasks.xml

@@ -31,10 +31,10 @@ def sort_lines(_file):
 def get_dataset_prefix_and_path(file_name):
     if file_name.lower() in ["pqa", "popqa"]:
         prefix = "Irrelevant_PQA"
-        path = "data/Irrelevant_PopQA"
+        path = "raw_data_and_contriever_docs/Irrelevant_PopQA"
     elif file_name.lower() in ["eq", "entityquestions"]:
         prefix = "Irrelevant_EQ"
-        path = "data/Irrelevant_EntityQuestions"
+        path = "raw_data_and_contriever_docs/Irrelevant_EntityQuestions"
     else:
         raise ValueError("Unexpected Dataset: " + file_name)
     return prefix, path

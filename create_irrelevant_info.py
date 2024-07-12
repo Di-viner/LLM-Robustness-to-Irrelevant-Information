@@ -230,4 +230,4 @@ def create_irrelevant_info(_type, dataset, output_path):
 
 if __name__ == "__main__":
     load_dotenv()
-    create_irrelevant_info("related", "EQ", "data/Irrelevant_EntityQuestions/EQ_test_related.txt")
+    create_irrelevant_info("related", "EQ", "raw_data_and_contriever_docs/Irrelevant_EntityQuestions/EQ_test_related.txt")

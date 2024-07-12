@@ -47,7 +47,7 @@ def build_multiple_choice_semantic_relevance_prompt(data, _type):
             irrelevant_info_list = [unit["partially_related_info"]]
             option_list = [unit["memory_answer"], unit["partially_related_template"], "I'm not sure."]
         elif _type == "related":
-            irrelevant_info_list = [unit["related_contriever_highest"]]
+            irrelevant_info_list = [unit["related_info_contriever_highest"]]
             option_list = [unit["memory_answer"], unit["related_template"], "I'm not sure."]
         else:
             raise ValueError("Unexpected type: " + _type)
@@ -73,9 +73,9 @@ def build_multiple_choice_quantity_prompt(data, multi_irrelevant_info_flag, rele
     for unit in data:
         question = unit['question']
         if multi_irrelevant_info_flag:
-            irrelevant_info_list = [unit['related_cc'], unit['related_ml'], unit['related_fa']]
+            irrelevant_info_list = [unit['related_info_cc'], unit['related_info_ml'], unit['related_info_fa']]
         else:
-            irrelevant_info_list = [unit['related_contriever_highest']]
+            irrelevant_info_list = [unit['related_info_contriever_highest']]
         relevant_info_list = [unit['parametric_memory']] if relevant_info_flag else []
         info_list = irrelevant_info_list + relevant_info_list
         option_list = [unit["memory_answer"], unit["related_template"], "I'm not sure."]
@@ -102,7 +102,7 @@ def build_format_prompt(data, format_type):
     for unit in data:
         question = unit['question']
         related_template = unit['related_template']
-        irrelevant_info_list = [unit['related_cc'], unit['related_ml'], unit['related_fa']]
+        irrelevant_info_list = [unit['related_info_cc'], unit['related_info_ml'], unit['related_info_fa']]
         relevant_info_list = unit['parametric_memory']
         info_list = irrelevant_info_list + relevant_info_list
         option_list = [unit["memory_answer"], unit["related_template"], "I'm not sure."]
