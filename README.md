@@ -1,10 +1,10 @@
 # [COLM'24] LLM-Robustness-to-Irrelevant-Information
 Code and Data for the Paper "[How Easily do Irrelevant Inputs Skew the Responses of Large Language Models?](https://arxiv.org/abs/2404.03302)".
 
-Will come soon. Stay tuned!
+We provide IrrQA based on different LLMs, including ChatGPT, GPT-4, Gemini and Llama-2-7B at [data](data) folder.
+The folder contains the data for PopQA and EntityQuestions.
 
------
-**Update in progress** We release our dataset at Hugging Face Datasets. Please check [PLACEHOLDER] for more details.
+We also release our dataset at Hugging Face Datasets. Please check [here](https://huggingface.co/datasets/Siye01/IrrQA) for more details.
 
 -----
 
