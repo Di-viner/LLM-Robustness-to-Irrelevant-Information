@@ -1,5 +1,6 @@
 # [COLM'24] LLM-Robustness-to-Irrelevant-Information
 Code and Data for the Paper "[How Easily do Irrelevant Inputs Skew the Responses of Large Language Models?](https://arxiv.org/abs/2404.03302)".
+![src/intro_figure.jpg](src/intro_figure.jpg)
 ## IrrQA
 We provide IrrQA for various LLMs (ChatGPT, GPT-4, Gemini and Llama-2-7B) in the [data](data) folder, including data for PopQA and EntityQuestions.
 ```json
@@ -15,7 +16,7 @@ from datasets import load_dataset
 dataset = load_dataset("siye01/IrrQA")["Irrelevant_PQA_chatgpt"]
 ```
 ## Irrelevant Information Creation
-**[Update in Progress]** To create irrelevant information, please download the raw data and contriever docs [here](https://drive.google.com/drive/folders/149Jdkirbm7ppP2kwMD4pDe8sILMvLKWv?usp=sharing). 
+To create irrelevant information, please download the raw data and contriever docs [here](https://drive.google.com/drive/folders/149Jdkirbm7ppP2kwMD4pDe8sILMvLKWv?usp=sharing). 
 Then, the directory structure should look like this:
 ```plaintext
 project-root/
