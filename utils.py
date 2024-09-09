@@ -1,6 +1,5 @@
 import json
 import re
-import os
 
 
 def load_line_json_data(filename):

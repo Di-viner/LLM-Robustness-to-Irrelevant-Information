@@ -1,4 +1,3 @@
-import utils
 import re
 
 uncertain_phrases = ["not specif", "not mention", "not possible",
