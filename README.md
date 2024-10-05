@@ -33,11 +33,13 @@ Regarding the process of parametric memory elicitation, please refer to the prev
 ## Citation
 If our paper or related resources prove valuable to your research, we kindly ask that you cite our work.
 ```bibtex
-@article{wu2024easily,
-  title={How Easily do Irrelevant Inputs Skew the Responses of Large Language Models?},
-  author={Wu, Siye and Xie, Jian and Chen, Jiangjie and Zhu, Tinghui and Zhang, Kai and Xiao, Yanghua},
-  journal={arXiv preprint arXiv:2404.03302},
-  year={2024}
+@inproceedings{
+wu2024how,
+title={How Easily do Irrelevant Inputs Skew the Responses of Large Language Models?},
+author={Siye Wu and Jian Xie and Jiangjie Chen and Tinghui Zhu and Kai Zhang and Yanghua Xiao},
+booktitle={First Conference on Language Modeling},
+year={2024},
+url={https://openreview.net/forum?id=S7NVVfuRv8}
 }
 ```
 
